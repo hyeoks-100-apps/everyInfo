@@ -21,16 +21,9 @@ export default function MarathonIndexPage() {
       </div>
       <h1 className="section-title">마라톤 일정</h1>
       <p className="section-description">
-        전체 일정을 모아보고 지역, 코스, 월별 필터로 빠르게 찾아보세요.
+        앞으로 예정된 대회를 중심으로 지역, 코스, 월별 필터로 빠르게 찾아보세요.
       </p>
       <MarathonList />
-      <p className="section-note">
-        연도별 상세 정보가 필요하면{' '}
-        <Link className="inline-link" href="/marathon/2026/">
-          2026 마라톤 일정 상세
-        </Link>
-        를 확인하세요.
-      </p>
     </div>
   );
 }
