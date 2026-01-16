@@ -99,6 +99,65 @@ export const marathonEvents2026: MarathonEvent[] = [
     note: '5K 45,000원(5K는 칩기록 X로 표기).',
   },
   {
+    name: '3.1절 107주년 기념 단축 마라톤',
+    date: '2026-03-01',
+    location: '인천',
+    distances: ['하프', '10K', '5K'],
+    link: 'https://31day.co.kr/',
+    note:
+      '하프/10K/5K 외에 10K 커플런·5K 가족런 구성도 있음(5K 계열은 칩기록 X로 안내됨).',
+  },
+  {
+    name: '2026 환경사랑 부산 K-런',
+    date: '2026-03-01',
+    location: '부산',
+    distances: ['10K', '5K'],
+    link: 'https://k-marathon.or.kr/',
+    note: '10K 50,000원 / 5K 40,000원. 5K는 기록칩 제외로 안내.',
+  },
+  {
+    name: '2026 구미 박정희 마라톤',
+    date: '2026-03-01',
+    location: '경북 구미',
+    distances: ['하프', '10K', '5K'],
+    link: 'https://www.gumimarathon.com/gumi/',
+    note:
+      '참가비(안내): 하프 50,000 / 10K 40,000 / 5K 30,000. 지역별 무료 셔틀버스 운영 안내.',
+  },
+  {
+    name: '제13회 안중근 평화 마라톤 대회',
+    date: '2026-03-01',
+    location: '서울',
+    distances: ['하프', '10K', '5K'],
+    link: 'https://ajgrun.kr/',
+    note: '참가비 안내: 5K 45,000원 / 10K·하프 50,000원.',
+  },
+  {
+    name: '제4회 코리아오픈 레이스',
+    date: '2026-03-07',
+    location: '서울',
+    distances: ['하프', '10K', '5K'],
+    link: 'https://www.koreaopenrace.com/',
+    note: '5K는 칩기록 X로 안내. (일반/마니아 참가비 구분 안내 있음)',
+  },
+  {
+    name: '2026 부천국제 10km 로드레이스',
+    date: '2026-03-08',
+    location: '경기 부천',
+    distances: ['10K', '3.5K'],
+    link: 'https://bskrun.co.kr/',
+    note: '공식 참가비 표기: 10K 50,000원 / 3.5K 40,000원.',
+  },
+  {
+    name: '2026 고양특례시 하프마라톤',
+    date: '2026-03-08',
+    location: '경기 고양',
+    distances: ['하프', '10K', '5K'],
+    link: 'https://www.goyangmarathon.com/',
+    note:
+      '본접수는 래플(추첨) 방식으로 안내됨. (참가비: 하프 70,000 / 10K 60,000 / 5K 40,000)',
+  },
+  {
     name: '2026 성주 참외 전국 마라톤 대회',
     date: '2026-03-08',
     location: '경북 성주',
@@ -121,6 +180,14 @@ export const marathonEvents2026: MarathonEvent[] = [
     distances: ['하프', '10K', '5K'],
     link: 'https://www.incheonmarathon.co.kr/',
     note: '지급물품에 기록칩/온라인기록증 포함(5km 제외).',
+  },
+  {
+    name: '서울 K-마라톤대회',
+    date: '2026-03-22',
+    location: '서울',
+    distances: ['하프', '10K'],
+    link: 'https://seoulmarathon.org/',
+    note: '코스(안내): 출발 광화문 광장 앞 대로 → 도착 무교로(변경 가능 고지).',
   },
   {
     name: '제24회 성우하이텍배 KNN 환경마라톤',
@@ -155,6 +222,15 @@ export const marathonEvents2026: MarathonEvent[] = [
     note: '민통구역 구간 촬영 제한, 작전 상황에 따라 코스 조정 가능.',
   },
   {
+    name: '제24회 경기마라톤대회',
+    date: '2026-04-19',
+    location: '경기 수원',
+    distances: ['풀', '하프', '10K', '5K'],
+    link: 'https://www.kgmarathon.co.kr/',
+    note:
+      '모집(안내): 총 10,000명(풀 1,500 / 하프 2,500 / 10K 3,500 / 5K 2,500). 참가비(안내): 5K 40,000원.',
+  },
+  {
     name: '2026 서울하프마라톤',
     date: '2026-04-26',
     location: '서울',
@@ -169,5 +245,13 @@ export const marathonEvents2026: MarathonEvent[] = [
     distances: ['10K', '5K', '3K', '랜선'],
     link: 'https://www.womenmarathon.co.kr/dorun/info.php',
     note: '공지사항 기준 10K는 마감된 것으로 표시됨.',
+  },
+  {
+    name: '제23회 서울시민 마라톤대회 (소아암환우돕기)',
+    date: '2026-05-10',
+    location: '서울',
+    distances: ['하프', '10K', '5K', '3K'],
+    link: 'https://soaam.runningdr.co.kr/sub/intro/intro_01.asp',
+    note: '공식 페이지에 접수 마감 안내 표시됨.',
   },
 ];
