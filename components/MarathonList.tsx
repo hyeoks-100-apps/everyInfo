@@ -124,23 +124,33 @@ export default function MarathonList() {
         </div>
       </div>
 
-      <div className="list-grid">
-        {filteredEvents.map((event) => (
-          <article className="info-card" key={`${event.name}-${event.date}`}>
-            <div className="info-card-header">
-              <h3>{event.name}</h3>
-              <span className="tag">{event.year}</span>
-            </div>
-            <span>{event.date}</span>
-            <p className="info-card-meta">
-              {event.location} · {event.distances.join(', ')}
-            </p>
-            <p>{event.note}</p>
-            <a className="card-link" href={event.link}>
-              공식 페이지 →
-            </a>
-          </article>
-        ))}
+      <div className="table-wrapper" role="region" aria-label="마라톤 일정 목록">
+        <table className="table">
+          <thead>
+            <tr>
+              <th scope="col">대회명</th>
+              <th scope="col">날짜</th>
+              <th scope="col">지역</th>
+              <th scope="col">코스</th>
+              <th scope="col">링크</th>
+              <th scope="col">비고</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filteredEvents.map((event) => (
+              <tr key={`${event.name}-${event.date}`}>
+                <td>{event.name}</td>
+                <td>{event.date}</td>
+                <td>{event.location}</td>
+                <td>{event.distances.join(', ')}</td>
+                <td>
+                  <a href={event.link}>방문하기</a>
+                </td>
+                <td>{event.note}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
     </section>
   );
