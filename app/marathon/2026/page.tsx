@@ -33,6 +33,7 @@ export default function Marathon2026Page() {
               <th scope="col">대회명</th>
               <th scope="col">날짜</th>
               <th scope="col">지역</th>
+              <th scope="col">코스</th>
               <th scope="col">링크</th>
               <th scope="col">비고</th>
             </tr>
@@ -43,6 +44,7 @@ export default function Marathon2026Page() {
                 <td>{event.name}</td>
                 <td>{event.date}</td>
                 <td>{event.location}</td>
+                <td>{event.distances.join(', ')}</td>
                 <td>
                   <a href={event.link} aria-label={`${event.name} 공식 페이지`}>
                     방문하기
