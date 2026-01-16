@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import MarathonList from '../../components/MarathonList';
 
 export const metadata: Metadata = {
   title: '마라톤 일정',
-  description: '연도별 마라톤 대회 일정과 캘린더 정보를 제공합니다.',
+  description:
+    '연도 구분 없이 마라톤 대회 일정과 지역, 코스 필터를 한 번에 확인합니다.',
   alternates: {
     canonical: '/marathon/',
   },
@@ -19,15 +21,16 @@ export default function MarathonIndexPage() {
       </div>
       <h1 className="section-title">마라톤 일정</h1>
       <p className="section-description">
-        연도별 마라톤 대회 일정 페이지로 이동하세요.
+        전체 일정을 모아보고 지역, 코스, 월별 필터로 빠르게 찾아보세요.
       </p>
-      <div className="card-grid">
-        <Link className="card" href="/marathon/2026/">
-          <h3>2026 마라톤 일정</h3>
-          <p>대회명, 날짜, 지역 정보를 한 번에 확인하세요.</p>
-          <span className="card-link">2026 일정 보기 →</span>
+      <MarathonList />
+      <p className="section-note">
+        연도별 상세 정보가 필요하면{' '}
+        <Link className="inline-link" href="/marathon/2026/">
+          2026 마라톤 일정 상세
         </Link>
-      </div>
+        를 확인하세요.
+      </p>
     </div>
   );
 }
