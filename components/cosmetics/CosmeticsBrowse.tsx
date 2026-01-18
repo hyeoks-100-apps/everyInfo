@@ -28,6 +28,7 @@ import {
 
 type FilterState = {
   q: string;
+  brands: string[];
   category: string[];
   priceRanges: string[];
   priceMin: string;
@@ -161,6 +162,7 @@ const initialStateFromParams = (searchParams: URLSearchParams): FilterState => {
   const pageValue = Number(searchParams.get('page') ?? DEFAULT_PAGE);
   return {
     q: searchParams.get('q') ?? '',
+    brands: parseList(searchParams.get('brand')),
     category: parseList(searchParams.get('category')),
     priceRanges: parseList(searchParams.get('price')),
     priceMin: parseNumber(searchParams.get('minPrice')),
@@ -189,6 +191,7 @@ const initialStateFromParams = (searchParams: URLSearchParams): FilterState => {
 const buildSearchParams = (state: FilterState) => {
   const params = new URLSearchParams();
   if (state.q) params.set('q', state.q);
+  if (state.brands.length) params.set('brand', state.brands.join(','));
   if (state.category.length) params.set('category', state.category.join(','));
   if (state.priceRanges.length)
     params.set('price', state.priceRanges.join(','));
@@ -286,6 +289,7 @@ export default function CosmeticsBrowse() {
   const resetFilters = () => {
     setState({
       q: '',
+      brands: [],
       category: [],
       priceRanges: [],
       priceMin: '',
@@ -335,6 +339,7 @@ export default function CosmeticsBrowse() {
         : true;
 
       return (
+        matchesAny(state.brands, product.brandKo) &&
         matchesAny(state.category, product.category.sub) &&
         priceMatches &&
         manualPriceMatches &&
@@ -404,6 +409,14 @@ export default function CosmeticsBrowse() {
         value: state.q,
       });
     }
+    state.brands.forEach((value) =>
+      chips.push({
+        id: `brand-${value}`,
+        label: value,
+        key: 'brands',
+        value,
+      })
+    );
     state.category.forEach((value) =>
       chips.push({
         id: `category-${value}`,
@@ -566,6 +579,22 @@ export default function CosmeticsBrowse() {
 
   const FilterPanel = () => (
     <div className="filter-panel cosmetics-filter-panel">
+      <FilterSection title="브랜드">
+        <div className="filter-options">
+          {[...new Set(products.map((product) => product.brandKo))].map(
+            (brand) => (
+              <label key={brand} className="filter-option">
+                <input
+                  type="checkbox"
+                  checked={state.brands.includes(brand)}
+                  onChange={() => toggleValue('brands', brand)}
+                />
+                {brand}
+              </label>
+            )
+          )}
+        </div>
+      </FilterSection>
       <FilterSection title="카테고리">
         {categoryGroups.map((group) => (
           <div key={group.label} className="filter-group">
