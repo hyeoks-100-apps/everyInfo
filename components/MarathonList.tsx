@@ -141,8 +141,13 @@ export default function MarathonList() {
             </tr>
           </thead>
           <tbody>
-            {filteredEvents.map((event) => (
-              <tr key={`${event.name}-${event.date}`}>
+            {filteredEvents.map((event) => {
+              const noteId = `note-${event.name}-${event.date}`.replace(
+                /[^a-zA-Z0-9-_]/g,
+                ''
+              );
+              return (
+                <tr key={`${event.name}-${event.date}`}>
                 <td>{event.name}</td>
                 <td>{event.date}</td>
                 <td>{event.location}</td>
@@ -152,9 +157,23 @@ export default function MarathonList() {
                     방문하기
                   </a>
                 </td>
-                <td>{event.note}</td>
+                <td>
+                  <div className="note-popover">
+                    <button
+                      className="note-trigger"
+                      type="button"
+                      aria-describedby={noteId}
+                    >
+                      자세히 보기
+                    </button>
+                    <span className="note-content" id={noteId} role="tooltip">
+                      {event.note}
+                    </span>
+                  </div>
+                </td>
               </tr>
-            ))}
+              );
+            })}
           </tbody>
         </table>
       </div>
