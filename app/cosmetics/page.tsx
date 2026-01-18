@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Suspense } from 'react';
+import CosmeticsBrowse from '../../components/cosmetics/CosmeticsBrowse';
 
 export const metadata: Metadata = {
   title: '화장품',
@@ -19,23 +21,11 @@ export default function CosmeticsPage() {
       </div>
       <h1 className="section-title">화장품</h1>
       <p className="section-description">
-        추천 리스트와 제품/성분 조회를 제공해요.
+        추천과 조회를 한 화면에서 바로 확인할 수 있어요.
       </p>
-      <div className="subtabs">
-        <Link className="subtab active" href="/cosmetics/">
-          추천
-        </Link>
-        <Link className="subtab" href="/cosmetics/browse/">
-          조회
-        </Link>
-      </div>
-      <div className="card-grid">
-        <Link className="card" href="/cosmetics/2026/">
-          <h3>2026 화장품 추천</h3>
-          <p>스킨케어와 메이크업 트렌드를 반영한 추천입니다.</p>
-          <span className="card-link">2026 추천 보기 →</span>
-        </Link>
-      </div>
+      <Suspense fallback={<div className="notice">조회 화면을 불러오는 중입니다.</div>}>
+        <CosmeticsBrowse />
+      </Suspense>
     </div>
   );
 }

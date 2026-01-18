@@ -21,16 +21,8 @@ export default function CosmeticsBrowsePage() {
       </div>
       <h1 className="section-title">화장품</h1>
       <p className="section-description">
-        추천 리스트와 제품/성분 조회를 제공해요.
+        추천과 조회를 한 화면에서 바로 확인할 수 있어요.
       </p>
-      <div className="subtabs">
-        <Link className="subtab" href="/cosmetics/">
-          추천
-        </Link>
-        <Link className="subtab active" href="/cosmetics/browse/">
-          조회
-        </Link>
-      </div>
       <Suspense fallback={<div className="notice">조회 화면을 불러오는 중입니다.</div>}>
         <CosmeticsBrowse />
       </Suspense>
