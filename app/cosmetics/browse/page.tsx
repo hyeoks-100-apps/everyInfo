@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import CosmeticsBrowse from '../../../components/cosmetics/CosmeticsBrowse';
 
 export const metadata: Metadata = {
@@ -30,7 +31,9 @@ export default function CosmeticsBrowsePage() {
           조회
         </Link>
       </div>
-      <CosmeticsBrowse />
+      <Suspense fallback={<div className="notice">조회 화면을 불러오는 중입니다.</div>}>
+        <CosmeticsBrowse />
+      </Suspense>
     </div>
   );
 }
