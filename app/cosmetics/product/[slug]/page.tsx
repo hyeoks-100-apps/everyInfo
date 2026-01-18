@@ -54,6 +54,11 @@ export const generateMetadata = ({ params }: PageProps): Metadata => {
   };
 };
 
+export const generateStaticParams = () =>
+  products.map((product) => ({ slug: product.slug }));
+
+export const dynamicParams = false;
+
 export default function CosmeticsProductPage({ params }: PageProps) {
   const product = products.find((item) => item.slug === params.slug);
   if (!product) {

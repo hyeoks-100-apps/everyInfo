@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { products } from '../../../../data/cosmetics/products';
 
 type PageProps = {
   params: {
@@ -14,6 +15,15 @@ export const generateMetadata = ({ params }: PageProps): Metadata => ({
     canonical: `/cosmetics/ingredient/${params.slug}/`,
   },
 });
+
+export const generateStaticParams = () => {
+  const unique = new Set(
+    products.flatMap((product) => product.ingredientSlugs ?? [])
+  );
+  return Array.from(unique).map((slug) => ({ slug }));
+};
+
+export const dynamicParams = false;
 
 export default function CosmeticsIngredientPage({ params }: PageProps) {
   return (
