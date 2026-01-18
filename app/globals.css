@@ -135,6 +135,21 @@ a {
   margin-bottom: 1.5rem;
 }
 
+.section-note {
+  color: var(--muted);
+  margin-top: 1.5rem;
+}
+
+.inline-link {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.inline-link:hover,
+.inline-link:focus {
+  text-decoration: underline;
+}
+
 .table-wrapper {
   overflow-x: auto;
   background: var(--card);
