@@ -124,8 +124,12 @@ export default function MarathonList() {
         </div>
       </div>
 
-      <div className="table-wrapper" role="region" aria-label="마라톤 일정 목록">
-        <table className="table">
+      <div
+        className="table-wrapper table-wrapper--elevated"
+        role="region"
+        aria-label="마라톤 일정 목록"
+      >
+        <table className="table table--compact">
           <thead>
             <tr>
               <th scope="col">대회명</th>
@@ -144,7 +148,9 @@ export default function MarathonList() {
                 <td>{event.location}</td>
                 <td>{event.distances.join(', ')}</td>
                 <td>
-                  <a href={event.link}>방문하기</a>
+                  <a className="table-link" href={event.link}>
+                    방문하기
+                  </a>
                 </td>
                 <td>{event.note}</td>
               </tr>
