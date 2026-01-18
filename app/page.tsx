@@ -41,7 +41,7 @@ export default function HomePage() {
           <CategoryCard
             title="화장품"
             description="트렌드 기반 화장품 추천 리스트를 제공합니다."
-            href="/beauty/"
+            href="/cosmetics/"
           />
         </div>
       </section>
