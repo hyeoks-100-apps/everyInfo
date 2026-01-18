@@ -136,7 +136,6 @@ export default function MarathonList() {
               <th scope="col">날짜</th>
               <th scope="col">지역</th>
               <th scope="col">코스</th>
-              <th scope="col">링크</th>
               <th scope="col">비고</th>
             </tr>
           </thead>
@@ -147,31 +146,41 @@ export default function MarathonList() {
                 ''
               );
               return (
-                <tr key={`${event.name}-${event.date}`}>
-                <td>{event.name}</td>
-                <td>{event.date}</td>
-                <td>{event.location}</td>
-                <td>{event.distances.join(', ')}</td>
-                <td>
-                  <a className="table-link" href={event.link}>
-                    방문하기
-                  </a>
-                </td>
-                <td>
-                  <div className="note-popover">
-                    <button
-                      className="note-trigger"
-                      type="button"
-                      aria-describedby={noteId}
-                    >
-                      자세히 보기
-                    </button>
-                    <span className="note-content" id={noteId} role="tooltip">
-                      {event.note}
-                    </span>
-                  </div>
-                </td>
-              </tr>
+                <tr
+                  className="table-row-link"
+                  key={`${event.name}-${event.date}`}
+                  onClick={() => {
+                    window.location.href = event.link;
+                  }}
+                  role="link"
+                  tabIndex={0}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      window.location.href = event.link;
+                    }
+                  }}
+                >
+                  <td>{event.name}</td>
+                  <td>{event.date}</td>
+                  <td>{event.location}</td>
+                  <td>{event.distances.join(', ')}</td>
+                  <td>
+                    <div className="note-popover">
+                      <button
+                        className="note-trigger"
+                        type="button"
+                        aria-describedby={noteId}
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        자세히 보기
+                      </button>
+                      <span className="note-content" id={noteId} role="tooltip">
+                        {event.note}
+                      </span>
+                    </div>
+                  </td>
+                </tr>
               );
             })}
           </tbody>

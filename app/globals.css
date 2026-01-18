@@ -299,14 +299,32 @@ a {
   background: #eff6ff;
 }
 
-.table-link {
-  color: var(--primary);
-  font-weight: 600;
+.table-row-link {
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
-.table-link:hover,
-.table-link:focus {
-  text-decoration: underline;
+.table-row-link:hover,
+.table-row-link:focus-within {
+  background: #e0ecff;
+}
+
+.table-row-link:active {
+  background: #d6e4ff;
+}
+
+.table-row-link td:first-child::after {
+  content: '↗';
+  margin-left: 0.35rem;
+  font-size: 0.85rem;
+  color: var(--primary);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.table-row-link:hover td:first-child::after,
+.table-row-link:focus-within td:first-child::after {
+  opacity: 1;
 }
 
 .note-popover {
