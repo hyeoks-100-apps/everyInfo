@@ -4,7 +4,7 @@ const navItems = [
   { href: '/', label: '홈' },
   { href: '/marathon/', label: '마라톤' },
   { href: '/game/', label: '게임' },
-  { href: '/beauty/', label: '화장품' },
+  { href: '/cosmetics/', label: '화장품' },
   { href: '/about/', label: 'About' },
 ];
 
