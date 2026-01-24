@@ -38,6 +38,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2370970936034063"
+          crossOrigin="anonymous"
+        ></script>
+      </head>
       <body>
         <SiteHeader />
         <main className="container main-content">{children}</main>
