@@ -3,6 +3,7 @@ export type LinkItem = {
   url: string;
   description: string;
   tags: string[];
+  isPopular?: boolean;
 };
 
 export type LinkCategory = {
@@ -23,12 +24,14 @@ export const linkCollections: LinkCategory[] = [
         url: 'https://comic.naver.com/webtoon',
         description: '요일별 인기 웹툰과 완결작을 한 번에 모아봅니다.',
         tags: ['국내', '인기', '요일별'],
+        isPopular: true,
       },
       {
         name: '카카오페이지',
         url: 'https://page.kakao.com/',
         description: '웹툰, 웹소설, 드라마 원작을 아우르는 종합 플랫폼.',
         tags: ['웹소설', '드라마 원작'],
+        isPopular: true,
       },
       {
         name: '레진코믹스',
@@ -60,6 +63,7 @@ export const linkCollections: LinkCategory[] = [
         url: 'https://www.netflix.com/kr/',
         description: '오리지널 시리즈와 글로벌 인기작을 추천합니다.',
         tags: ['오리지널', '글로벌'],
+        isPopular: true,
       },
       {
         name: '디즈니+',
@@ -72,6 +76,7 @@ export const linkCollections: LinkCategory[] = [
         url: 'https://www.tving.com/',
         description: '국내 예능과 드라마, 스포츠 중계를 제공합니다.',
         tags: ['국내', '스포츠'],
+        isPopular: true,
       },
       {
         name: '웨이브',
@@ -103,12 +108,14 @@ export const linkCollections: LinkCategory[] = [
         url: 'https://www.spotvnow.co.kr/',
         description: '해외 축구와 종목별 중계 일정을 제공합니다.',
         tags: ['해외축구', '중계'],
+        isPopular: true,
       },
       {
         name: 'KBO',
         url: 'https://www.koreabaseball.com/',
         description: '프로야구 경기 일정과 팀 순위를 확인합니다.',
         tags: ['야구', '일정'],
+        isPopular: true,
       },
       {
         name: 'K리그',
@@ -140,6 +147,7 @@ export const linkCollections: LinkCategory[] = [
         url: 'https://www.dcinside.com/',
         description: '갤러리별 이슈와 밈을 빠르게 확인합니다.',
         tags: ['갤러리', '트렌드'],
+        isPopular: true,
       },
       {
         name: '에펨코리아',
@@ -158,6 +166,7 @@ export const linkCollections: LinkCategory[] = [
         url: 'https://ruliweb.com/',
         description: '게임·서브컬처 정보와 커뮤니티 토론을 제공합니다.',
         tags: ['게임', '서브컬처'],
+        isPopular: true,
       },
       {
         name: '클리앙',
@@ -183,12 +192,14 @@ export const linkCollections: LinkCategory[] = [
         url: 'https://shopping.naver.com/',
         description: '가격 비교와 리뷰 기반 쇼핑을 제공합니다.',
         tags: ['가격비교', '리뷰'],
+        isPopular: true,
       },
       {
         name: '쿠팡',
         url: 'https://www.coupang.com/',
         description: '로켓배송과 빠른 재구매 기능을 제공합니다.',
         tags: ['로켓배송', '멤버십'],
+        isPopular: true,
       },
       {
         name: '11번가',
@@ -220,6 +231,7 @@ export const linkCollections: LinkCategory[] = [
         url: 'https://www.inflearn.com/',
         description: '개발·디자인 등 실무 기반 온라인 강의를 제공합니다.',
         tags: ['온라인 강의', '실무'],
+        isPopular: true,
       },
       {
         name: '패스트캠퍼스',
@@ -232,6 +244,7 @@ export const linkCollections: LinkCategory[] = [
         url: 'https://www.notion.so/ko-kr',
         description: '문서, 프로젝트, 지식 관리를 한곳에서 처리합니다.',
         tags: ['문서', '협업'],
+        isPopular: true,
       },
       {
         name: '토스 커뮤니티',
