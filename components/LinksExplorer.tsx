@@ -40,14 +40,13 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
     [categories],
   );
 
-  const filteredCategories = useMemo(
+  const filteredLinks = useMemo(
     () =>
       categories
-        .map((category) => ({
-          ...category,
-          links: category.links.filter((item) => matchesQuery(item, query)),
-        }))
-        .filter((category) => category.links.length > 0),
+        .flatMap((category) =>
+          category.links.map((link) => ({ ...link, categoryTitle: category.title })),
+        )
+        .filter((link) => matchesQuery(link, query)),
     [categories, query],
   );
 
@@ -92,22 +91,6 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
         </div>
       </section>
 
-      <section className="links-category-nav">
-        <h2 className="section-title">카테고리 홈</h2>
-        <p className="section-description">
-          각 카테고리로 바로 이동해 원하는 사이트를 빠르게 찾아보세요.
-        </p>
-        <div className="card-grid">
-          {categories.map((category) => (
-            <a key={category.id} className="card" href={`#${category.id}`}>
-              <h3>{category.title}</h3>
-              <p>{category.description}</p>
-              <span className="card-link">{category.links.length}개 링크 보기 →</span>
-            </a>
-          ))}
-        </div>
-      </section>
-
       <section className="links-popular">
         <h2 className="section-title">인기 사이트</h2>
         <p className="section-description">
@@ -141,19 +124,38 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
         </div>
       </section>
 
+      <section className="links-category-nav">
+        <h2 className="section-title">카테고리별 링크 보러 가기</h2>
+        <p className="section-description">
+          각 카테고리 상세 페이지에서 링크를 모아서 볼 수 있습니다.
+        </p>
+        <div className="card-grid">
+          {categories.map((category) => (
+            <a key={category.id} className="card" href={`/links/${category.id}/`}>
+              <h3>{category.title}</h3>
+              <p>{category.description}</p>
+              <span className="card-link">{category.links.length}개 링크 보기 →</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
       <section className="links-results">
         <div className="results-header">
           <div>
-            <h2 className="section-title">카테고리별 링크</h2>
+            <h2 className="section-title">검색 결과</h2>
             <p className="section-description">
-              {query
-                ? `검색 결과 ${filteredCategories.length}개 카테고리에서 확인됩니다.`
-                : '모든 카테고리 링크를 정리했습니다.'}
+              {query ? `총 ${filteredLinks.length}개의 사이트가 검색됩니다.` : '검색어를 입력해 주세요.'}
             </p>
           </div>
         </div>
 
-        {filteredCategories.length === 0 ? (
+        {!query ? (
+          <div className="empty-state">
+            <h3>원하는 사이트를 검색해보세요.</h3>
+            <p>검색 결과는 이 영역에 표시됩니다.</p>
+          </div>
+        ) : filteredLinks.length === 0 ? (
           <div className="empty-state">
             <h3>검색 결과가 없습니다.</h3>
             <p>다른 키워드로 다시 검색해보세요.</p>
@@ -162,36 +164,32 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
             </button>
           </div>
         ) : (
-          filteredCategories.map((category) => (
-            <section key={category.id} id={category.id} className="list-section">
-              <div>
-                <h3 className="section-title">{category.title}</h3>
-                <p className="section-description">{category.description}</p>
-              </div>
-              <div className="list-grid">
-                {category.links.map((item) => (
-                  <a
-                    key={item.name}
-                    className="card"
-                    href={item.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <h4>{item.name}</h4>
-                    <p>{item.description}</p>
-                    <div className="tag-row">
-                      {item.tags.map((tag) => (
-                        <span key={tag} className="chip-lite">
-                          #{tag}
-                        </span>
-                      ))}
-                    </div>
-                    <span className="card-link">바로가기 →</span>
-                  </a>
-                ))}
-              </div>
-            </section>
-          ))
+          <div className="list-grid">
+            {filteredLinks.map((item) => (
+              <a
+                key={`${item.categoryTitle}-${item.name}`}
+                className="card"
+                href={item.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div className="popular-card-header">
+                  <span className="chip-lite">{item.categoryTitle}</span>
+                  {item.isPopular ? <span className="tag">인기</span> : null}
+                </div>
+                <h3>{item.name}</h3>
+                <p>{item.description}</p>
+                <div className="tag-row">
+                  {item.tags.map((tag) => (
+                    <span key={tag} className="chip-lite">
+                      #{tag}
+                    </span>
+                  ))}
+                </div>
+                <span className="card-link">바로가기 →</span>
+              </a>
+            ))}
+          </div>
         )}
       </section>
     </div>

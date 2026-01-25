@@ -918,6 +918,19 @@ a {
   margin-bottom: 2.5rem;
 }
 
+.links-detail-hero {
+  background: var(--card);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  margin-bottom: 2.5rem;
+}
+
+.links-detail-hero h1 {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+}
+
 .empty-state {
   background: #fff;
   border: 1px solid var(--border);
