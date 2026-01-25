@@ -17,8 +17,8 @@ export default function HomePage() {
       <section className="hero">
         <h1>카테고리별 정보 허브, everyInfo</h1>
         <p>
-          마라톤 일정, 게임 추천, 화장품 트렌드를 SEO 친화적인 정적 페이지로
-          모아서 제공합니다.
+          마라톤 일정, 게임 추천, 화장품 트렌드, 링크 모음을 SEO 친화적인
+          정적 페이지로 모아서 제공합니다.
         </p>
       </section>
 
@@ -42,6 +42,11 @@ export default function HomePage() {
             title="화장품"
             description="트렌드 기반 화장품 추천 리스트를 제공합니다."
             href="/cosmetics/"
+          />
+          <CategoryCard
+            title="링크 모음"
+            description="웹툰, OTT, 스포츠 등 인기 서비스를 모아봤어요."
+            href="/links/"
           />
         </div>
       </section>

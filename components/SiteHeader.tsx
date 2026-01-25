@@ -5,6 +5,7 @@ const navItems = [
   { href: '/marathon/', label: '마라톤' },
   { href: '/game/', label: '게임' },
   { href: '/cosmetics/', label: '화장품' },
+  { href: '/links/', label: '링크 모음' },
   { href: '/about/', label: 'About' },
 ];
 
