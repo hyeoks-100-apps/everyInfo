@@ -91,7 +91,7 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
         </div>
       </section>
 
-      <section className="links-popular">
+      <section className="links-popular section-panel">
         <h2 className="section-title">인기 사이트</h2>
         <p className="section-description">
           방문이 많은 대표 서비스만 먼저 모아서 보여드립니다.
@@ -124,7 +124,7 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
         </div>
       </section>
 
-      <section className="links-category-nav">
+      <section className="links-category-nav section-panel">
         <h2 className="section-title">카테고리별 링크 보러 가기</h2>
         <p className="section-description">
           각 카테고리 상세 페이지에서 링크를 모아서 볼 수 있습니다.
@@ -140,7 +140,7 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
         </div>
       </section>
 
-      <section className="links-results">
+      <section className="links-results section-panel">
         <div className="results-header">
           <div>
             <h2 className="section-title">검색 결과</h2>
