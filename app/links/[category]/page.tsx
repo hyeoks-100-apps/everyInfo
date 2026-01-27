@@ -26,6 +26,16 @@ export const generateMetadata = ({ params }: LinksCategoryPageProps): Metadata =
     alternates: {
       canonical: `/links/${category.id}/`,
     },
+    openGraph: {
+      title: `${category.title} 링크 모음`,
+      description: category.description,
+      url: `/links/${category.id}/`,
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${category.title} 링크 모음`,
+      description: category.description,
+    },
   };
 };
 
