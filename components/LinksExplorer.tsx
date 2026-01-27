@@ -108,10 +108,15 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
       </section>
 
       <section className="links-popular section-panel">
-        <h2 className="section-title">인기 사이트</h2>
-        <p className="section-description">
-          방문이 많은 대표 서비스만 먼저 모아서 보여드립니다.
-        </p>
+        <div className="section-heading">
+          <div>
+            <h2 className="section-title">인기 사이트</h2>
+            <p className="section-description">
+              방문이 많은 대표 서비스만 먼저 모아서 보여드립니다.
+            </p>
+          </div>
+          <span className="section-badge">TOP 8</span>
+        </div>
         <div className="list-grid">
           {popularLinks.map((item) => (
             <a
@@ -148,6 +153,7 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
         <div className="card-grid">
           {categories.map((category) => (
             <a key={category.id} className="card" href={`/links/${category.id}/`}>
+              <span className="card-count">{category.links.length}개 링크</span>
               <h3>{category.title}</h3>
               <p>{category.description}</p>
               <span className="card-link">{category.links.length}개 링크 보기 →</span>
