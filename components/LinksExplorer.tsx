@@ -21,6 +21,8 @@ type LinksExplorerProps = {
   categories: LinkCategory[];
 };
 
+const quickTags = ['웹툰', 'OTT', '스포츠', '커뮤니티', '쇼핑', '학습'];
+
 export default function LinksExplorer({ categories }: LinksExplorerProps) {
   const [query, setQuery] = useState('');
 
@@ -61,6 +63,18 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
               웹툰, OTT, 스포츠, 커뮤니티 등 자주 찾는 서비스를 빠르게
               북마크하세요. 원하는 이름이나 태그로 검색할 수 있습니다.
             </p>
+            <div className="links-hero-tags" aria-label="추천 검색 태그">
+              {quickTags.map((tag) => (
+                <button
+                  key={tag}
+                  type="button"
+                  className="chip chip-lite"
+                  onClick={() => setQuery(tag)}
+                >
+                  {tag}
+                </button>
+              ))}
+            </div>
           </div>
           <div className="links-hero-search">
             <label className="search-label" htmlFor="links-search">
@@ -75,18 +89,20 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
               />
-              <button
-                className="filter-reset"
-                type="button"
-                onClick={() => setQuery('')}
-                disabled={!query}
-              >
-                검색 초기화
+              <button className="search-submit" type="button" aria-label="검색 실행">
+                검색
               </button>
             </div>
-            <p className="search-helper">
-              총 {categories.length}개 카테고리 · {totalLinks}개 사이트 제공
-            </p>
+            <div className="search-meta">
+              <p className="search-helper">
+                총 {categories.length}개 카테고리 · {totalLinks}개 사이트 제공
+              </p>
+              {query ? (
+                <button className="link-reset" type="button" onClick={() => setQuery('')}>
+                  검색 초기화
+                </button>
+              ) : null}
+            </div>
           </div>
         </div>
       </section>
@@ -148,6 +164,11 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
               {query ? `총 ${filteredLinks.length}개의 사이트가 검색됩니다.` : '검색어를 입력해 주세요.'}
             </p>
           </div>
+          {query ? (
+            <span className="tag">검색 중</span>
+          ) : (
+            <span className="chip-lite">미입력</span>
+          )}
         </div>
 
         {!query ? (
