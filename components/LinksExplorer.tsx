@@ -1,21 +1,8 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import type { LinkCategory, LinkItem } from '../data/linkCollections';
-
-const normalize = (value: string) => value.toLowerCase().trim();
-
-const matchesQuery = (item: LinkItem, query: string) => {
-  const keyword = normalize(query);
-  if (!keyword) {
-    return true;
-  }
-  return (
-    normalize(item.name).includes(keyword) ||
-    normalize(item.description).includes(keyword) ||
-    item.tags.some((tag) => normalize(tag).includes(keyword))
-  );
-};
+import { useRouter } from 'next/navigation';
+import type { LinkCategory } from '../data/linkCollections';
 
 type LinksExplorerProps = {
   categories: LinkCategory[];
@@ -25,6 +12,7 @@ const quickTags = ['웹툰', 'OTT', '스포츠', '커뮤니티', '쇼핑', '학�
 
 export default function LinksExplorer({ categories }: LinksExplorerProps) {
   const [query, setQuery] = useState('');
+  const router = useRouter();
 
   const totalLinks = useMemo(
     () => categories.reduce((sum, category) => sum + category.links.length, 0),
@@ -42,15 +30,7 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
     [categories],
   );
 
-  const filteredLinks = useMemo(
-    () =>
-      categories
-        .flatMap((category) =>
-          category.links.map((link) => ({ ...link, categoryTitle: category.title })),
-        )
-        .filter((link) => matchesQuery(link, query)),
-    [categories, query],
-  );
+  const hasQuery = query.trim().length > 0;
 
   return (
     <div className="links-page">
@@ -69,7 +49,7 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
                   key={tag}
                   type="button"
                   className="chip chip-lite"
-                  onClick={() => setQuery(tag)}
+                  onClick={() => router.push(`/links/search?query=${encodeURIComponent(tag)}`)}
                 >
                   {tag}
                 </button>
@@ -80,7 +60,16 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
             <label className="search-label" htmlFor="links-search">
               사이트 검색
             </label>
-            <div className="search-bar">
+            <form
+              className="search-bar"
+              onSubmit={(event) => {
+                event.preventDefault();
+                if (!hasQuery) {
+                  return;
+                }
+                router.push(`/links/search?query=${encodeURIComponent(query.trim())}`);
+              }}
+            >
               <input
                 id="links-search"
                 className="search-input"
@@ -89,15 +78,15 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}
               />
-              <button className="search-submit" type="button" aria-label="검색 실행">
+              <button className="search-submit" type="submit" aria-label="검색 실행">
                 검색
               </button>
-            </div>
+            </form>
             <div className="search-meta">
               <p className="search-helper">
                 총 {categories.length}개 카테고리 · {totalLinks}개 사이트 제공
               </p>
-              {query ? (
+              {hasQuery ? (
                 <button className="link-reset" type="button" onClick={() => setQuery('')}>
                   검색 초기화
                 </button>
@@ -162,62 +151,21 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
         </div>
       </section>
 
-      <section className="links-results section-panel">
-        <div className="results-header">
+      <section className="links-search-cta section-panel">
+        <div className="section-heading">
           <div>
-            <h2 className="section-title">검색 결과</h2>
+            <h2 className="section-title">검색으로 바로 찾기</h2>
             <p className="section-description">
-              {query ? `총 ${filteredLinks.length}개의 사이트가 검색됩니다.` : '검색어를 입력해 주세요.'}
+              키워드를 입력하면 전용 검색 페이지에서 결과를 바로 확인할 수 있어요.
             </p>
           </div>
-          {query ? (
-            <span className="tag">검색 중</span>
-          ) : (
-            <span className="chip-lite">미입력</span>
-          )}
+          <span className="section-badge">검색</span>
         </div>
-
-        {!query ? (
-          <div className="empty-state">
-            <h3>원하는 사이트를 검색해보세요.</h3>
-            <p>검색 결과는 이 영역에 표시됩니다.</p>
-          </div>
-        ) : filteredLinks.length === 0 ? (
-          <div className="empty-state">
-            <h3>검색 결과가 없습니다.</h3>
-            <p>다른 키워드로 다시 검색해보세요.</p>
-            <button className="filter-reset" type="button" onClick={() => setQuery('')}>
-              검색 초기화
-            </button>
-          </div>
-        ) : (
-          <div className="list-grid">
-            {filteredLinks.map((item) => (
-              <a
-                key={`${item.categoryTitle}-${item.name}`}
-                className="card"
-                href={item.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                <div className="popular-card-header">
-                  <span className="chip-lite">{item.categoryTitle}</span>
-                  {item.isPopular ? <span className="tag">인기</span> : null}
-                </div>
-                <h3>{item.name}</h3>
-                <p>{item.description}</p>
-                <div className="tag-row">
-                  {item.tags.map((tag) => (
-                    <span key={tag} className="chip-lite">
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-                <span className="card-link">바로가기 →</span>
-              </a>
-            ))}
-          </div>
-        )}
+        <div className="cta-row">
+          <span className="chip-lite">예: 네이버웹툰</span>
+          <span className="chip-lite">예: OTT</span>
+          <span className="chip-lite">예: 스포츠</span>
+        </div>
       </section>
     </div>
   );

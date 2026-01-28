@@ -10,6 +10,7 @@ const staticRoutes = [
   '/',
   '/about/',
   '/links/',
+  '/links/search/',
   '/marathon/',
   '/marathon/2026/',
   '/game/',
