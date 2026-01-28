@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import type { LinkCategory } from '../data/linkCollections';
 
 type LinksExplorerProps = {
@@ -12,7 +12,6 @@ const quickTags = ['웹툰', 'OTT', '스포츠', '커뮤니티', '쇼핑', '학�
 
 export default function LinksExplorer({ categories }: LinksExplorerProps) {
   const [query, setQuery] = useState('');
-  const router = useRouter();
 
   const totalLinks = useMemo(
     () => categories.reduce((sum, category) => sum + category.links.length, 0),
@@ -45,14 +44,13 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
             </p>
             <div className="links-hero-tags" aria-label="추천 검색 태그">
               {quickTags.map((tag) => (
-                <button
+                <Link
                   key={tag}
-                  type="button"
                   className="chip chip-lite"
-                  onClick={() => router.push(`/links/search?query=${encodeURIComponent(tag)}`)}
+                  href={`/links/search?query=${encodeURIComponent(tag)}`}
                 >
                   {tag}
-                </button>
+                </Link>
               ))}
             </div>
           </div>
@@ -60,20 +58,12 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
             <label className="search-label" htmlFor="links-search">
               사이트 검색
             </label>
-            <form
-              className="search-bar"
-              onSubmit={(event) => {
-                event.preventDefault();
-                if (!hasQuery) {
-                  return;
-                }
-                router.push(`/links/search?query=${encodeURIComponent(query.trim())}`);
-              }}
-            >
+            <form className="search-bar" action="/links/search" method="get">
               <input
                 id="links-search"
                 className="search-input"
                 type="search"
+                name="query"
                 placeholder="사이트 이름 또는 태그로 검색..."
                 value={query}
                 onChange={(event) => setQuery(event.target.value)}

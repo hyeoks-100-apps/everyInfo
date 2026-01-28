@@ -71,6 +71,18 @@ export default function LinksSearchPage({
           </div>
           {hasQuery ? <span className="tag">검색 중</span> : <span className="chip-lite">미입력</span>}
         </div>
+        <form className="search-bar search-bar-inline" action="/links/search" method="get">
+          <input
+            className="search-input"
+            type="search"
+            name="query"
+            placeholder="사이트 이름 또는 태그로 검색..."
+            defaultValue={query}
+          />
+          <button className="search-submit" type="submit">
+            검색
+          </button>
+        </form>
 
         {!hasQuery ? (
           <div className="empty-state">
