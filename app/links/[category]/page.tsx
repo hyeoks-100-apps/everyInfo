@@ -17,23 +17,23 @@ export const generateMetadata = ({ params }: LinksCategoryPageProps): Metadata =
   const category = getCategory(params.category);
   if (!category) {
     return {
-      title: '링크 모음',
+      title: '주소 모음',
     };
   }
   return {
-    title: `${category.title} 링크 모음`,
+    title: `${category.title} 주소 모음`,
     description: category.description,
     alternates: {
       canonical: `/links/${category.id}/`,
     },
     openGraph: {
-      title: `${category.title} 링크 모음`,
+      title: `${category.title} 주소 모음`,
       description: category.description,
       url: `/links/${category.id}/`,
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${category.title} 링크 모음`,
+      title: `${category.title} 주소 모음`,
       description: category.description,
     },
   };
@@ -50,13 +50,13 @@ export default function LinksCategoryPage({ params }: LinksCategoryPageProps) {
       <div className="breadcrumb">
         <Link href="/">홈</Link>
         <span>/</span>
-        <Link href="/links/">링크 모음</Link>
+        <Link href="/links/">주소 모음</Link>
         <span>/</span>
         <span>{category.title}</span>
       </div>
 
       <section className="links-detail-hero">
-        <h1>{category.title} 링크 모음</h1>
+        <h1>{category.title} 주소 모음</h1>
         <p className="section-description">{category.description}</p>
         <div className="filter-summary">
           <span>

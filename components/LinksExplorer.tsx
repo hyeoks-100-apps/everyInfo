@@ -57,8 +57,8 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
       <section className="links-hero">
         <div className="links-hero-content">
           <div>
-            <p className="links-hero-pill">링크 모음</p>
-            <h1>카테고리별 인기 사이트를 한 곳에서</h1>
+            <p className="links-hero-pill">주소 모음</p>
+            <h1>카테고리별 인기 사이트 주소를 한 곳에서</h1>
             <p>
               웹툰, OTT, 스포츠, 커뮤니티 등 자주 찾는 서비스를 빠르게
               북마크하세요. 원하는 이름이나 태그로 검색할 수 있습니다.
