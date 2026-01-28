@@ -21,19 +21,37 @@ const staticRoutes = [
   '/cosmetics/browse/',
 ];
 
+const toEntry = (
+  path: string,
+  {
+    lastModified,
+    changeFrequency,
+    priority,
+  }: {
+    lastModified: Date;
+    changeFrequency: MetadataRoute.Sitemap[number]['changeFrequency'];
+    priority: number;
+  }
+): MetadataRoute.Sitemap[number] => ({
+  url: buildUrl(path),
+  lastModified,
+  changeFrequency,
+  priority,
+});
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
 
   const linkCategoryRoutes = linkCollections.map((category) => `/links/${category.id}/`);
 
-  const productRoutes = products.map((product) => ({
+  const productRoutes: MetadataRoute.Sitemap = products.map((product) => ({
     url: buildUrl(`/cosmetics/product/${product.slug}/`),
     lastModified: new Date(product.updatedAt),
     changeFrequency: 'monthly',
     priority: 0.6,
   }));
 
-  const brandRoutes = Array.from(
+  const brandRoutes: MetadataRoute.Sitemap = Array.from(
     new Set(products.map((product) => slugify(product.brandKo)))
   ).map((slug) => ({
     url: buildUrl(`/cosmetics/brand/${slug}/`),
@@ -42,7 +60,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.3,
   }));
 
-  const ingredientRoutes = Array.from(
+  const ingredientRoutes: MetadataRoute.Sitemap = Array.from(
     new Set(products.flatMap((product) => product.ingredientSlugs ?? []))
   ).map((slug) => ({
     url: buildUrl(`/cosmetics/ingredient/${slug}/`),
@@ -51,19 +69,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.3,
   }));
 
-  return [
-    ...staticRoutes.map((path) => ({
-      url: buildUrl(path),
+  const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((path) =>
+    toEntry(path, {
       lastModified: now,
       changeFrequency: 'weekly',
       priority: path === '/' ? 1 : 0.7,
-    })),
-    ...linkCategoryRoutes.map((path) => ({
-      url: buildUrl(path),
+    })
+  );
+
+  const linkCategoryEntries: MetadataRoute.Sitemap = linkCategoryRoutes.map((path) =>
+    toEntry(path, {
       lastModified: now,
       changeFrequency: 'weekly',
       priority: 0.6,
-    })),
+    })
+  );
+
+  return [
+    ...staticEntries,
+    ...linkCategoryEntries,
     ...productRoutes,
     ...brandRoutes,
     ...ingredientRoutes,
