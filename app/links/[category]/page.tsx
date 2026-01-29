@@ -23,6 +23,7 @@ export const generateMetadata = ({ params }: LinksCategoryPageProps): Metadata =
   return {
     title: `${category.title} 주소 모음`,
     description: category.description,
+    keywords: ['주소 모음', category.title, '사이트 주소', '카테고리'],
     alternates: {
       canonical: `/links/${category.id}/`,
     },

@@ -966,6 +966,41 @@ a {
   margin: 1.5rem 0;
 }
 
+.seo-summary {
+  background: var(--card);
+  border-radius: 18px;
+  padding: 1.75rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.06);
+}
+
+.seo-summary .section-description {
+  margin-bottom: 1rem;
+}
+
+.seo-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  list-style: none;
+}
+
+.seo-list a {
+  background: #f8fafc;
+  border: 1px solid var(--border);
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.seo-list a:hover,
+.seo-list a:focus {
+  color: var(--primary);
+  border-color: rgba(29, 78, 216, 0.4);
+}
+
 .links-category-nav .card {
   border: none;
   box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
