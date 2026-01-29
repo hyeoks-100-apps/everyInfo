@@ -141,22 +141,6 @@ export default function LinksExplorer({ categories }: LinksExplorerProps) {
         </div>
       </section>
 
-      <section className="links-search-cta section-panel">
-        <div className="section-heading">
-          <div>
-            <h2 className="section-title">검색으로 바로 찾기</h2>
-            <p className="section-description">
-              키워드를 입력하면 전용 검색 페이지에서 결과를 바로 확인할 수 있어요.
-            </p>
-          </div>
-          <span className="section-badge">검색</span>
-        </div>
-        <div className="cta-row">
-          <span className="chip-lite">예: 네이버웹툰</span>
-          <span className="chip-lite">예: OTT</span>
-          <span className="chip-lite">예: 스포츠</span>
-        </div>
-      </section>
     </div>
   );
 }

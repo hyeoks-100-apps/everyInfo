@@ -988,20 +988,6 @@ a {
   font-weight: 700;
 }
 
-.links-search-cta .section-description {
-  margin-bottom: 0;
-}
-
-.cta-row {
-  display: flex;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.cta-row .chip-lite {
-  background: #f1f5f9;
-}
-
 .links-popular .popular-card {
   background: #111827;
   color: #f9fafb;
