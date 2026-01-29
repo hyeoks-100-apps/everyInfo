@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { Suspense } from 'react';
 import LinksSearchClient from '../../../components/LinksSearchClient';
 
 export const metadata: Metadata = {
@@ -20,7 +21,9 @@ export default function LinksSearchPage() {
         <span>/</span>
         <span>검색</span>
       </div>
-      <LinksSearchClient />
+      <Suspense fallback={<div className="notice">검색 결과를 불러오는 중입니다.</div>}>
+        <LinksSearchClient />
+      </Suspense>
     </div>
   );
 }
