@@ -55,7 +55,6 @@ const routes = [
   '/',
   '/about/',
   '/links/',
-  '/links/search/',
   '/marathon/',
   '/marathon/2026/',
   '/game/',
@@ -150,7 +149,7 @@ const generateSitemap = async () => {
 };
 
 const generateRobots = async () => {
-  const robots = `User-agent: *\nAllow: /\nSitemap: ${joinUrl(siteUrl, '/sitemap.xml')}\n`;
+  const robots = `User-agent: *\nAllow: /\nDisallow: /links/search/\nSitemap: ${joinUrl(siteUrl, '/sitemap.xml')}\n`;
   await writeFile(path.join(outputDir, 'robots.txt'), robots);
 };
 
