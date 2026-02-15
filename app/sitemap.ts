@@ -11,7 +11,6 @@ const staticRoutes = [
   '/',
   '/about/',
   '/links/',
-  '/links/search/',
   '/marathon/',
   '/marathon/2026/',
   '/game/',
@@ -53,24 +52,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     lastModified: new Date(product.updatedAt),
     changeFrequency: 'monthly',
     priority: 0.6,
-  }));
-
-  const brandRoutes: MetadataRoute.Sitemap = Array.from(
-    new Set(products.map((product) => slugify(product.brandKo)))
-  ).map((slug) => ({
-    url: buildUrl(`/cosmetics/brand/${slug}/`),
-    lastModified: now,
-    changeFrequency: 'yearly',
-    priority: 0.3,
-  }));
-
-  const ingredientRoutes: MetadataRoute.Sitemap = Array.from(
-    new Set(products.flatMap((product) => product.ingredientSlugs ?? []))
-  ).map((slug) => ({
-    url: buildUrl(`/cosmetics/ingredient/${slug}/`),
-    lastModified: now,
-    changeFrequency: 'yearly',
-    priority: 0.3,
   }));
 
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((path) =>

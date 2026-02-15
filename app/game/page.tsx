@@ -1,17 +1,37 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { siteUrl } from '../../lib/site';
 
 export const metadata: Metadata = {
   title: '게임 추천',
   description: '연도별 게임 추천 리스트를 제공합니다.',
+  keywords: ['게임 추천', '출시 예정 게임', '연도별 게임'],
   alternates: {
     canonical: '/game/',
   },
+  openGraph: {
+    title: '게임 추천',
+    description: '연도별 게임 추천 리스트를 제공합니다.',
+    url: '/game/',
+  },
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${siteUrl}/` },
+    { '@type': 'ListItem', position: 2, name: '게임', item: `${siteUrl}/game/` },
+  ],
 };
 
 export default function GameIndexPage() {
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <div className="breadcrumb">
         <Link href="/">홈</Link>
         <span>/</span>
