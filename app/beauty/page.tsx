@@ -1,17 +1,37 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { siteUrl } from '../../lib/site';
 
 export const metadata: Metadata = {
   title: '화장품 추천',
   description: '연도별 화장품 추천 리스트를 제공합니다.',
+  keywords: ['화장품 추천', '뷰티 추천', '스킨케어 추천', '메이크업 추천'],
   alternates: {
     canonical: '/beauty/',
   },
+  openGraph: {
+    title: '화장품 추천',
+    description: '연도별 화장품 추천 리스트를 제공합니다.',
+    url: '/beauty/',
+  },
+};
+
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '홈', item: `${siteUrl}/` },
+    { '@type': 'ListItem', position: 2, name: '화장품', item: `${siteUrl}/beauty/` },
+  ],
 };
 
 export default function BeautyIndexPage() {
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <div className="breadcrumb">
         <Link href="/">홈</Link>
         <span>/</span>

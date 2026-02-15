@@ -14,6 +14,10 @@ export const generateMetadata = ({ params }: PageProps): Metadata => ({
   alternates: {
     canonical: `/cosmetics/ingredient/${params.slug}/`,
   },
+  robots: {
+    index: false,
+    follow: true,
+  },
 });
 
 export const generateStaticParams = () => {
