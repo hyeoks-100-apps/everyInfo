@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { linkCollections } from '../../../data/linkCollections';
+import { siteUrl } from '../../../lib/site';
 
 type LinksCategoryPageProps = {
   params: { category: string };
@@ -46,8 +47,68 @@ export default function LinksCategoryPage({ params }: LinksCategoryPageProps) {
     notFound();
   }
 
+  const itemListJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: `${category.title} 주소 모음`,
+    itemListElement: category.links.map((item, index) => ({
+      '@type': 'ListItem',
+      position: index + 1,
+      name: item.name,
+      url: item.url,
+      description: item.description,
+    })),
+  };
+
+
+  const webPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${category.title} 주소 모음`,
+    description: category.description,
+    url: `${siteUrl}/links/${category.id}/`,
+    inLanguage: 'ko-KR',
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: '홈',
+        item: `${siteUrl}/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: '주소 모음',
+        item: `${siteUrl}/links/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: category.title,
+        item: `${siteUrl}/links/${category.id}/`,
+      },
+    ],
+  };
+
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <div className="breadcrumb">
         <Link href="/">홈</Link>
         <span>/</span>
@@ -77,7 +138,7 @@ export default function LinksCategoryPage({ params }: LinksCategoryPageProps) {
               className="card"
               href={item.url}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener"
             >
               <div className="popular-card-header">
                 <span className="chip-lite">{category.title}</span>

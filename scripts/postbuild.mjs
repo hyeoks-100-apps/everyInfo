@@ -55,7 +55,6 @@ const routes = [
   '/',
   '/about/',
   '/links/',
-  '/links/search/',
   '/marathon/',
   '/marathon/2026/',
   '/game/',
@@ -68,14 +67,6 @@ const routes = [
   '/404.html',
 ];
 
-const slugify = (value) =>
-  value
-    .toLowerCase()
-    .trim()
-    .replace(/[\s/]+/g, '-')
-    .replace(/[^a-z0-9가-힣-]/g, '')
-    .replace(/-+/g, '-');
-
 const extractMatches = (text, pattern) => {
   const matches = [];
   let match;
@@ -85,11 +76,6 @@ const extractMatches = (text, pattern) => {
   return matches;
 };
 
-const extractIngredientSlugs = (text) => {
-  const blocks = extractMatches(text, /ingredientSlugs:\s*\[([\s\S]*?)\]/g);
-  const slugs = blocks.flatMap((block) => extractMatches(block, /'([^']+)'/g));
-  return Array.from(new Set(slugs));
-};
 
 const loadDynamicRoutes = async () => {
   const linkCollectionsPath = path.join(process.cwd(), 'data', 'linkCollections.ts');
@@ -101,16 +87,10 @@ const loadDynamicRoutes = async () => {
 
   const linkCategoryIds = extractMatches(linkCollectionsSource, /id:\s*'([^']+)'/g);
   const productSlugs = extractMatches(productsSource, /slug:\s*'([^']+)'/g);
-  const brandNames = extractMatches(productsSource, /brandKo:\s*'([^']+)'/g);
-  const ingredientSlugs = extractIngredientSlugs(productsSource);
 
   const dynamicRoutes = [
     ...linkCategoryIds.map((id) => `/links/${id}/`),
     ...productSlugs.map((slug) => `/cosmetics/product/${slug}/`),
-    ...Array.from(new Set(brandNames.map((name) => slugify(name)))).map(
-      (slug) => `/cosmetics/brand/${slug}/`
-    ),
-    ...ingredientSlugs.map((slug) => `/cosmetics/ingredient/${slug}/`),
   ];
 
   return Array.from(new Set(dynamicRoutes));
@@ -150,7 +130,7 @@ const generateSitemap = async () => {
 };
 
 const generateRobots = async () => {
-  const robots = `User-agent: *\nAllow: /\nSitemap: ${joinUrl(siteUrl, '/sitemap.xml')}\n`;
+  const robots = `User-agent: *\nAllow: /\nDisallow: /links/search/\nSitemap: ${joinUrl(siteUrl, '/sitemap.xml')}\n`;
   await writeFile(path.join(outputDir, 'robots.txt'), robots);
 };
 
