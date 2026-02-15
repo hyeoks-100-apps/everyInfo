@@ -11,6 +11,7 @@ import {
   textureOptions,
   undertoneOptions,
 } from '../../../../data/cosmetics/filterOptions';
+import { siteUrl } from '../../../../lib/site';
 
 type PageProps = {
   params: {
@@ -45,11 +46,33 @@ export const generateMetadata = ({ params }: PageProps): Metadata => {
       title: '제품을 찾을 수 없습니다',
     };
   }
+
+  const description = product.descriptionKo ?? '화장품 상세 정보를 확인하세요.';
+
   return {
     title: `${product.nameKo} - ${product.brandKo}`,
-    description: product.descriptionKo ?? '화장품 상세 정보를 확인하세요.',
+    description,
+    keywords: [
+      product.nameKo,
+      product.brandKo,
+      '화장품 추천',
+      '성분',
+      '스킨케어',
+      '메이크업',
+    ],
     alternates: {
       canonical: `/cosmetics/product/${product.slug}/`,
+    },
+    openGraph: {
+      title: `${product.nameKo} - ${product.brandKo}`,
+      description,
+      url: `/cosmetics/product/${product.slug}/`,
+      type: 'article',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${product.nameKo} - ${product.brandKo}`,
+      description,
     },
   };
 };
@@ -72,8 +95,61 @@ export default function CosmeticsProductPage({ params }: PageProps) {
     )
     .slice(0, 4);
 
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.nameKo,
+    brand: {
+      '@type': 'Brand',
+      name: product.brandKo,
+    },
+    description: product.descriptionKo ?? '화장품 상세 정보',
+    category: categoryLabelMap[product.category.sub] ?? product.category.sub,
+    sku: product.slug,
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: product.price.currency,
+      price: product.price.amount,
+      availability: 'https://schema.org/InStock',
+      url: `${siteUrl}/cosmetics/product/${product.slug}/`,
+    },
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: '홈',
+        item: `${siteUrl}/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: '화장품',
+        item: `${siteUrl}/cosmetics/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        name: product.nameKo,
+        item: `${siteUrl}/cosmetics/product/${product.slug}/`,
+      },
+    ],
+  };
+
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <div className="breadcrumb">
         <Link href="/">홈</Link>
         <span>/</span>

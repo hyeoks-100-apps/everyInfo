@@ -10,6 +10,18 @@ export const metadata: Metadata = {
     template: '%s | everyInfo',
   },
   description: siteConfig.description,
+  keywords: ['everyInfo', '정보 허브', '카테고리별 정보', '마라톤', '화장품', '게임', '주소 모음'],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
   alternates: {
     canonical: '/',
   },
@@ -29,6 +41,21 @@ export const metadata: Metadata = {
       },
     ],
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteConfig.name,
+    description: siteConfig.description,
+    images: [siteConfig.ogImage],
+  },
+};
+
+const websiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: siteConfig.name,
+  url: siteUrl,
+  description: siteConfig.description,
+  inLanguage: 'ko-KR',
 };
 
 export default function RootLayout({
@@ -39,6 +66,10 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
+        />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2370970936034063"
