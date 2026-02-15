@@ -1,19 +1,47 @@
 import type { Metadata } from 'next';
 import CategoryCard from '../components/CategoryCard';
+import { siteUrl } from '../lib/site';
 
 export const metadata: Metadata = {
   title: {
     absolute: 'everyInfo',
   },
   description: '카테고리별 정적 정보/캘린더/추천 페이지를 한 곳에서 확인하세요.',
+  keywords: ['everyInfo', '정보 허브', '마라톤 일정', '게임 추천', '화장품 추천', '주소 모음'],
   alternates: {
     canonical: '/',
   },
+  openGraph: {
+    title: 'everyInfo',
+    description: '카테고리별 정적 정보/캘린더/추천 페이지를 한 곳에서 확인하세요.',
+    url: '/',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'everyInfo',
+    description: '카테고리별 정적 정보/캘린더/추천 페이지를 한 곳에서 확인하세요.',
+  },
+};
+
+const websiteSectionsJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  name: 'everyInfo 주요 카테고리',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: '마라톤', url: `${siteUrl}/marathon/` },
+    { '@type': 'ListItem', position: 2, name: '게임', url: `${siteUrl}/game/` },
+    { '@type': 'ListItem', position: 3, name: '화장품', url: `${siteUrl}/cosmetics/` },
+    { '@type': 'ListItem', position: 4, name: '주소 모음', url: `${siteUrl}/links/` },
+  ],
 };
 
 export default function HomePage() {
   return (
     <div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSectionsJsonLd) }}
+      />
       <section className="hero">
         <h1>카테고리별 정보 허브, everyInfo</h1>
         <p>
