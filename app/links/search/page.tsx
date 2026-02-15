@@ -9,6 +9,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/links/search/',
   },
+  robots: {
+    index: false,
+    follow: true,
+    googleBot: {
+      index: false,
+      follow: true,
+    },
+  },
 };
 
 export default function LinksSearchPage() {
