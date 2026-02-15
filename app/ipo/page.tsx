@@ -4,8 +4,14 @@ import Link from 'next/link';
 export const metadata: Metadata = {
   title: '공모주 청약 캘린더',
   description: '연도별 공모주 청약 일정과 핵심 지표를 한눈에 확인합니다.',
+  keywords: ['공모주', 'IPO', '청약 일정', '주관사', '수요예측'],
   alternates: {
     canonical: '/ipo/',
+  },
+  openGraph: {
+    title: '공모주 청약 캘린더',
+    description: '연도별 공모주 청약 일정과 핵심 지표를 한눈에 확인합니다.',
+    url: '/ipo/',
   },
 };
 
@@ -23,13 +29,13 @@ export default function IpoIndexPage() {
       </p>
 
       <section className="info-card" style={{ marginBottom: '1rem' }}>
-        <h2>필수 데이터 형식</h2>
+        <h2>크롤링용 JSON 형식 (권장)</h2>
+        <p>아래 스키마 기준으로 수집하면 페이지/SEO 반영이 안정적입니다.</p>
+        <p>스키마 파일: <a href="/ipo-offering-schema.json" target="_blank" rel="noreferrer">/ipo-offering-schema.json</a></p>
         <ul>
-          <li>회사명, 시장(KOSPI/KOSDAQ), 업종</li>
-          <li>청약 시작일/종료일, 환불일, 상장일</li>
-          <li>희망 공모가 밴드, 확정 공모가, 경쟁률</li>
-          <li>대표 주관사, 최소 청약 수량/증거금</li>
-          <li>공식 공시·안내 URL, 최종 업데이트 일시</li>
+          <li>필수: companyNameKo, market, status, subscriptionStartDate, subscriptionEndDate</li>
+          <li>가격: offerPriceBand(min/max/currency), confirmedOfferPrice</li>
+          <li>신뢰: sourceUrls, officialNoticeUrl, lastUpdatedAt</li>
         </ul>
       </section>
 
@@ -38,6 +44,16 @@ export default function IpoIndexPage() {
           <h3>2026 공모주 일정</h3>
           <p>월별 청약 이슈와 기업별 상세 페이지를 확인하세요.</p>
           <span className="card-link">2026 캘린더 보기 →</span>
+        </Link>
+        <Link className="card" href="/ipo/market/">
+          <h3>시장별 공모주</h3>
+          <p>KOSPI/KOSDAQ 기준으로 종목을 탐색합니다.</p>
+          <span className="card-link">시장별 보기 →</span>
+        </Link>
+        <Link className="card" href="/ipo/manager/">
+          <h3>주관사별 공모주</h3>
+          <p>증권사 기준으로 청약 가능 종목을 확인합니다.</p>
+          <span className="card-link">주관사별 보기 →</span>
         </Link>
       </div>
     </div>

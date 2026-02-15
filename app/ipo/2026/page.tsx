@@ -1,12 +1,18 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { ipoOfferings2026 } from '../../../data/ipo2026';
+import { ipoOfferings, managerSlugify } from '../../../data/ipo';
 
 export const metadata: Metadata = {
   title: '2026 공모주 청약 일정',
   description: '2026년 공모주 청약 일정과 핵심 지표를 정리합니다.',
+  keywords: ['2026 공모주', 'IPO 일정', '청약 일정', '주관사별 공모주'],
   alternates: {
     canonical: '/ipo/2026/',
+  },
+  openGraph: {
+    title: '2026 공모주 청약 일정',
+    description: '2026년 공모주 청약 일정과 핵심 지표를 정리합니다.',
+    url: '/ipo/2026/',
   },
 };
 
@@ -32,17 +38,30 @@ export default function Ipo2026Page() {
               <th scope="col">기업명</th>
               <th scope="col">시장</th>
               <th scope="col">청약일</th>
+              <th scope="col">주관사</th>
               <th scope="col">희망공모가</th>
               <th scope="col">상세</th>
             </tr>
           </thead>
           <tbody>
-            {ipoOfferings2026.map((ipo) => (
+            {ipoOfferings.map((ipo) => (
               <tr key={ipo.id}>
                 <td>{ipo.companyNameKo}</td>
-                <td>{ipo.market}</td>
+                <td>
+                  <Link href={`/ipo/market/${ipo.market.toLowerCase()}/`}>{ipo.market}</Link>
+                </td>
                 <td>
                   {ipo.subscriptionStartDate} ~ {ipo.subscriptionEndDate}
+                </td>
+                <td>
+                  {ipo.leadManagers.map((manager, index) => (
+                    <span key={manager}>
+                      {index > 0 ? ', ' : ''}
+                      <Link href={`/ipo/manager/${managerSlugify(manager)}/`}>
+                        {manager}
+                      </Link>
+                    </span>
+                  ))}
                 </td>
                 <td>
                   {ipo.offerPriceBand.min.toLocaleString()}원 ~{' '}

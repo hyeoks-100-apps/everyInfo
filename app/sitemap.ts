@@ -3,6 +3,7 @@ import { linkCollections } from '../data/linkCollections';
 import { products } from '../data/cosmetics/products';
 import { ipoOfferings2026 } from '../data/ipo2026';
 import { slugify } from '../data/cosmetics/utils';
+import { ipoManagers, ipoMarkets, ipoOfferings } from '../data/ipo';
 import { siteUrl } from '../lib/site';
 
 const buildUrl = (path: string) => `${siteUrl}${path}`;
@@ -22,6 +23,8 @@ const staticRoutes = [
   '/cosmetics/browse/',
   '/ipo/',
   '/ipo/2026/',
+  '/ipo/market/',
+  '/ipo/manager/',
 ];
 
 const toEntry = (
@@ -54,6 +57,45 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }));
 
+  const brandRoutes: MetadataRoute.Sitemap = Array.from(
+    new Set(products.map((product) => slugify(product.brandKo)))
+  ).map((slug) => ({
+    url: buildUrl(`/cosmetics/brand/${slug}/`),
+    lastModified: now,
+    changeFrequency: 'yearly',
+    priority: 0.3,
+  }));
+
+  const ingredientRoutes: MetadataRoute.Sitemap = Array.from(
+    new Set(products.flatMap((product) => product.ingredientSlugs ?? []))
+  ).map((slug) => ({
+    url: buildUrl(`/cosmetics/ingredient/${slug}/`),
+    lastModified: now,
+    changeFrequency: 'yearly',
+    priority: 0.3,
+  }));
+
+  const ipoCompanyEntries: MetadataRoute.Sitemap = ipoOfferings.map((offering) => ({
+    url: buildUrl(`/ipo/company/${offering.slug}/`),
+    lastModified: new Date(offering.lastUpdatedAt),
+    changeFrequency: 'daily',
+    priority: 0.8,
+  }));
+
+  const ipoMarketEntries: MetadataRoute.Sitemap = ipoMarkets.map((market) => ({
+    url: buildUrl(`/ipo/market/${market.toLowerCase()}/`),
+    lastModified: now,
+    changeFrequency: 'daily',
+    priority: 0.7,
+  }));
+
+  const ipoManagerEntries: MetadataRoute.Sitemap = ipoManagers.map((manager) => ({
+    url: buildUrl(`/ipo/manager/${manager.slug}/`),
+    lastModified: now,
+    changeFrequency: 'daily',
+    priority: 0.7,
+  }));
+
   const staticEntries: MetadataRoute.Sitemap = staticRoutes.map((path) =>
     toEntry(path, {
       lastModified: now,
@@ -83,6 +125,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...productRoutes,
     ...brandRoutes,
     ...ingredientRoutes,
-    ...ipoEntries,
+    ...ipoCompanyEntries,
+    ...ipoMarketEntries,
+    ...ipoManagerEntries,
   ];
 }

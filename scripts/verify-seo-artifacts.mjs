@@ -30,7 +30,7 @@ const main = async () => {
     fail('sitemap.xml has no <loc> entries');
   }
 
-  const requiredPaths = ['/', '/links/', '/cosmetics/', '/ipo/'];
+  const requiredPaths = ['/', '/links/', '/cosmetics/', '/ipo/', '/ipo/market/', '/ipo/manager/'];
   const missingPaths = requiredPaths.filter(
     (requiredPath) => !locs.some((loc) => loc.endsWith(requiredPath))
   );

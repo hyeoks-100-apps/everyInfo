@@ -5,6 +5,7 @@ export type IpoOffering = {
   companyNameEn?: string;
   market: 'KOSPI' | 'KOSDAQ' | 'KONEX' | '미정';
   industry: string;
+  status: 'scheduled' | 'open' | 'closed' | 'listed' | 'postponed';
   subscriptionStartDate: string;
   subscriptionEndDate: string;
   listingDate?: string;
@@ -22,6 +23,8 @@ export type IpoOffering = {
   };
   minimumSubscriptionShares?: number;
   minimumDepositKrW?: number;
+  tags?: string[];
+  sourceUrls: string[];
   officialNoticeUrl: string;
   investmentWarning: string;
   lastUpdatedAt: string;
@@ -35,6 +38,7 @@ export const ipoOfferings2026: IpoOffering[] = [
     companyNameEn: 'Seoul AI Robotics',
     market: 'KOSDAQ',
     industry: '지능형 로봇·자동화',
+    status: 'scheduled',
     subscriptionStartDate: '2026-03-09',
     subscriptionEndDate: '2026-03-10',
     listingDate: '2026-03-18',
@@ -52,6 +56,8 @@ export const ipoOfferings2026: IpoOffering[] = [
     },
     minimumSubscriptionShares: 10,
     minimumDepositKrW: 105000,
+    tags: ['로봇', 'AI', '자동화'],
+    sourceUrls: ['https://example.com/source/dart-seoul-ai-robotics'],
     officialNoticeUrl: 'https://example.com/ipo/seoul-ai-robotics',
     investmentWarning:
       '예시 데이터입니다. 실제 청약 전 증권신고서/정정신고서와 주관사 공지를 반드시 확인하세요.',
@@ -64,6 +70,7 @@ export const ipoOfferings2026: IpoOffering[] = [
     companyNameEn: 'Hangang BioHealth',
     market: 'KOSPI',
     industry: '바이오·헬스케어',
+    status: 'scheduled',
     subscriptionStartDate: '2026-04-14',
     subscriptionEndDate: '2026-04-15',
     listingDate: '2026-04-24',
@@ -76,6 +83,8 @@ export const ipoOfferings2026: IpoOffering[] = [
     },
     minimumSubscriptionShares: 10,
     minimumDepositKrW: 130000,
+    tags: ['바이오', '헬스케어'],
+    sourceUrls: ['https://example.com/source/dart-hanriver-biohealth'],
     officialNoticeUrl: 'https://example.com/ipo/hanriver-biohealth',
     investmentWarning:
       '예시 데이터입니다. 실제 청약 전 증권신고서/정정신고서와 주관사 공지를 반드시 확인하세요.',
