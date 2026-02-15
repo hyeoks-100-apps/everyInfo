@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import CategoryCard from '../components/CategoryCard';
 import { siteUrl } from '../lib/site';
 
@@ -47,6 +48,11 @@ export default function HomePage() {
         <p>
           마라톤 일정, 게임 추천, 화장품 트렌드, 공모주 캘린더, 주소 모음을
           SEO 친화적인 정적 페이지로 모아서 제공합니다.
+        </p>
+        <p>
+          <Link className="card-link" href="/ipo/">
+            공모주 페이지 바로가기 →
+          </Link>
         </p>
       </section>
 
