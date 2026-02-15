@@ -106,13 +106,24 @@ export default function CosmeticsProductPage({ params }: PageProps) {
     description: product.descriptionKo ?? '화장품 상세 정보',
     category: categoryLabelMap[product.category.sub] ?? product.category.sub,
     sku: product.slug,
+    dateModified: product.updatedAt,
+    inLanguage: 'ko-KR',
     offers: {
       '@type': 'Offer',
       priceCurrency: product.price.currency,
       price: product.price.amount,
-      availability: 'https://schema.org/InStock',
       url: `${siteUrl}/cosmetics/product/${product.slug}/`,
     },
+  };
+
+
+  const webPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    name: `${product.nameKo} - ${product.brandKo}`,
+    description: product.descriptionKo ?? '화장품 상세 정보',
+    url: `${siteUrl}/cosmetics/product/${product.slug}/`,
+    inLanguage: 'ko-KR',
   };
 
   const breadcrumbJsonLd = {
@@ -145,6 +156,10 @@ export default function CosmeticsProductPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
       />
       <script
         type="application/ld+json"

@@ -23,7 +23,24 @@ export const metadata: Metadata = {
   },
 };
 
+const faqItems = [
+  {
+    question: '주소 모음 페이지는 얼마나 자주 업데이트되나요?',
+    answer: '카테고리별 주요 사이트 주소를 주기적으로 점검하고 최신 상태로 반영합니다.',
+  },
+  {
+    question: '카테고리별 바로가기는 어디서 볼 수 있나요?',
+    answer: '페이지 상단 카테고리 목록과 탐색기에서 원하는 카테고리로 바로 이동할 수 있습니다.',
+  },
+  {
+    question: '인기 사이트만 확인할 수 있나요?',
+    answer: '각 카테고리 상세 페이지에서 인기 태그가 붙은 사이트를 우선적으로 확인할 수 있습니다.',
+  },
+];
+
 export default function LinksPage() {
+  const pageUrl = `${siteUrl}/links/`;
+
   const itemListJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -36,11 +53,51 @@ export default function LinksPage() {
     })),
   };
 
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: '홈',
+        item: `${siteUrl}/`,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: '주소 모음',
+        item: pageUrl,
+      },
+    ],
+  };
+
   return (
     <div>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <div className="breadcrumb">
         <Link href="/">홈</Link>
@@ -48,7 +105,7 @@ export default function LinksPage() {
         <span>주소 모음</span>
       </div>
       <section className="seo-summary">
-        <h2 className="section-title">주소 모음이란?</h2>
+        <h1 className="section-title">주소 모음</h1>
         <p className="section-description">
           자주 찾는 웹툰, OTT, 스포츠, 커뮤니티, 쇼핑 사이트 주소를 카테고리별로
           정리해 빠르게 탐색할 수 있도록 만든 큐레이션 페이지입니다.
@@ -62,12 +119,15 @@ export default function LinksPage() {
         </ul>
       </section>
       <LinksExplorer categories={linkCollections} />
-      <section className="seo-summary">
+      <section className="seo-summary" aria-label="자주 묻는 질문">
         <h2 className="section-title">자주 묻는 질문</h2>
         <ul className="seo-list">
-          <li>Q. 주소 모음 페이지는 얼마나 자주 업데이트되나요? → 카테고리별로 주기적으로 점검합니다.</li>
-          <li>Q. 카테고리별 바로가기는 어디서 볼 수 있나요? → 위 목록 또는 탐색기에서 바로 이동할 수 있습니다.</li>
-          <li>Q. 인기 사이트만 보고 싶다면? → 카테고리 상세 페이지에서 인기 태그를 확인해보세요.</li>
+          {faqItems.map((item) => (
+            <li key={item.question}>
+              <strong>Q. {item.question}</strong>
+              <p>A. {item.answer}</p>
+            </li>
+          ))}
         </ul>
       </section>
     </div>

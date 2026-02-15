@@ -60,6 +60,16 @@ export default function LinksCategoryPage({ params }: LinksCategoryPageProps) {
     })),
   };
 
+
+  const webPageJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: `${category.title} 주소 모음`,
+    description: category.description,
+    url: `${siteUrl}/links/${category.id}/`,
+    inLanguage: 'ko-KR',
+  };
+
   const breadcrumbJsonLd = {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
@@ -90,6 +100,10 @@ export default function LinksCategoryPage({ params }: LinksCategoryPageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
       />
       <script
         type="application/ld+json"
@@ -124,7 +138,7 @@ export default function LinksCategoryPage({ params }: LinksCategoryPageProps) {
               className="card"
               href={item.url}
               target="_blank"
-              rel="noreferrer"
+              rel="noreferrer noopener nofollow"
             >
               <div className="popular-card-header">
                 <span className="chip-lite">{category.title}</span>
