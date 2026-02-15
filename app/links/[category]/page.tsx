@@ -138,7 +138,7 @@ export default function LinksCategoryPage({ params }: LinksCategoryPageProps) {
               className="card"
               href={item.url}
               target="_blank"
-              rel="noreferrer noopener nofollow"
+              rel="noreferrer noopener"
             >
               <div className="popular-card-header">
                 <span className="chip-lite">{category.title}</span>
