@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next';
 import { linkCollections } from '../data/linkCollections';
 import { products } from '../data/cosmetics/products';
+import { ipoOfferings2026 } from '../data/ipo2026';
 import { slugify } from '../data/cosmetics/utils';
 import { siteUrl } from '../lib/site';
 
@@ -20,6 +21,8 @@ const staticRoutes = [
   '/cosmetics/',
   '/cosmetics/2026/',
   '/cosmetics/browse/',
+  '/ipo/',
+  '/ipo/2026/',
 ];
 
 const toEntry = (
@@ -86,11 +89,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  const ipoEntries: MetadataRoute.Sitemap = ipoOfferings2026.map((offering) => ({
+    url: buildUrl(`/ipo/company/${offering.slug}/`),
+    lastModified: new Date(offering.lastUpdatedAt),
+    changeFrequency: 'daily',
+    priority: 0.8,
+  }));
+
   return [
     ...staticEntries,
     ...linkCategoryEntries,
     ...productRoutes,
     ...brandRoutes,
     ...ingredientRoutes,
+    ...ipoEntries,
   ];
 }

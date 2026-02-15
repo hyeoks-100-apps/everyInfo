@@ -17,6 +17,18 @@ npm run build
 
 빌드가 완료되면 `out/` 폴더에 정적 파일이 생성됩니다.
 
+## 검색 엔진 제출 (Google Search Console / Play Console 확인용)
+
+- 사이트맵 제출 주소: `https://<내-도메인>/sitemap.xml`
+- robots 주소: `https://<내-도메인>/robots.txt`
+- GitHub Pages 또는 커스텀 도메인 배포 시, 빌드 환경변수 `SITE_URL`을 실제 운영 도메인으로 설정해야 올바른 절대 URL이 생성됩니다.
+
+## 공모주(IPO) 데이터 스키마
+
+- 위치: `data/ipo2026.ts`
+- AI 수집 파이프라인에서 아래 필드를 채우면 `/ipo/`, `/ipo/2026/`, `/ipo/company/[slug]/` 페이지에서 바로 렌더링됩니다.
+- 핵심 필드: `slug`, `companyNameKo`, `market`, `industry`, `subscriptionStartDate`, `subscriptionEndDate`, `offerPriceBand`, `leadManagers`, `officialNoticeUrl`, `lastUpdatedAt`
+
 ## GitHub Pages 설정 방법
 
 1. GitHub 저장소의 **Settings > Pages** 메뉴로 이동합니다.
