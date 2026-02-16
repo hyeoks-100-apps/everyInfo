@@ -1083,3 +1083,93 @@ a {
   color: var(--text);
   margin-bottom: 0.5rem;
 }
+
+.ipo-home {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.ipo-home-hero {
+  background: linear-gradient(135deg, #eef4ff 0%, #f5f3ff 50%, #ffffff 100%);
+  border: 1px solid #dbe6ff;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 18px 36px rgba(37, 99, 235, 0.08);
+}
+
+.ipo-home-hero .section-title {
+  margin-top: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.ipo-home-hero .section-description {
+  margin-bottom: 1.25rem;
+  max-width: 760px;
+}
+
+.ipo-kpi-grid {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.ipo-kpi-card {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid #dbe3f0;
+  border-radius: 16px;
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.ipo-kpi-label {
+  color: #64748b;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.ipo-kpi-value {
+  color: #1d4ed8;
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+
+.ipo-kpi-card p {
+  color: #64748b;
+  font-size: 0.9rem;
+}
+
+.ipo-guide-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-left: 1.1rem;
+  color: #334155;
+}
+
+.ipo-entry-card {
+  position: relative;
+  overflow: hidden;
+  border-color: #dbe3f0;
+}
+
+.ipo-entry-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(150deg, rgba(37, 99, 235, 0.06), transparent 55%);
+  pointer-events: none;
+}
+
+.ipo-entry-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 12px;
+  background: #eef2ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
