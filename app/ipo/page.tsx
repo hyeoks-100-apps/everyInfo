@@ -25,17 +25,15 @@ export default function IpoIndexPage() {
       </div>
       <h1 className="section-title">공모주 청약 캘린더</h1>
       <p className="section-description">
-        AI 수집 데이터로 빠르게 갱신 가능한 스키마 기반 공모주 일정 허브입니다.
+        청약 일정·주관사·공모가를 빠르게 확인할 수 있는 공모주 정보 허브입니다.
       </p>
 
       <section className="info-card" style={{ marginBottom: '1rem' }}>
-        <h2>크롤링용 JSON 형식 (권장)</h2>
-        <p>아래 스키마 기준으로 수집하면 페이지/SEO 반영이 안정적입니다.</p>
-        <p>스키마 파일: <a href="/ipo-offering-schema.json" target="_blank" rel="noreferrer">/ipo-offering-schema.json</a></p>
+        <h2>서비스 안내</h2>
         <ul>
-          <li>필수: companyNameKo, market, status, subscriptionStartDate, subscriptionEndDate</li>
-          <li>가격: offerPriceBand(min/max/currency), confirmedOfferPrice</li>
-          <li>신뢰: sourceUrls, officialNoticeUrl, lastUpdatedAt</li>
+          <li>연도별 일정, 시장별, 주관사별로 공모주를 탐색할 수 있습니다.</li>
+          <li>상세 페이지에서 청약일·환불일·상장일·경쟁률·출처 링크를 제공합니다.</li>
+          <li>투자 전에는 반드시 공시/DART와 주관사 안내를 최종 확인하세요.</li>
         </ul>
       </section>
 
