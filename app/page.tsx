@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import CategoryCard from '../components/CategoryCard';
 
 export const metadata: Metadata = {
@@ -17,8 +18,13 @@ export default function HomePage() {
       <section className="hero">
         <h1>카테고리별 정보 허브, everyInfo</h1>
         <p>
-          마라톤 일정, 게임 추천, 화장품 트렌드, 주소 모음을 SEO 친화적인
-          정적 페이지로 모아서 제공합니다.
+          마라톤 일정, 게임 추천, 화장품 트렌드, 공모주 캘린더, 주소 모음을
+          SEO 친화적인 정적 페이지로 모아서 제공합니다.
+        </p>
+        <p>
+          <Link className="card-link" href="/ipo/">
+            공모주 페이지 바로가기 →
+          </Link>
         </p>
       </section>
 
@@ -47,6 +53,11 @@ export default function HomePage() {
             title="주소 모음"
             description="웹툰, OTT, 스포츠 등 인기 사이트 주소를 모아봤어요."
             href="/links/"
+          />
+          <CategoryCard
+            title="공모주"
+            description="공모주 청약 일정과 기업별 핵심 정보를 제공합니다."
+            href="/ipo/"
           />
         </div>
       </section>
