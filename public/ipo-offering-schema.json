@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "IpoOffering",
+  "type": "object",
+  "required": [
+    "id",
+    "slug",
+    "companyNameKo",
+    "market",
+    "industry",
+    "status",
+    "subscriptionStartDate",
+    "subscriptionEndDate",
+    "leadManagers",
+    "offerPriceBand",
+    "sourceUrls",
+    "officialNoticeUrl",
+    "lastUpdatedAt"
+  ],
+  "properties": {
+    "id": { "type": "string" },
+    "slug": { "type": "string" },
+    "companyNameKo": { "type": "string" },
+    "companyNameEn": { "type": "string" },
+    "market": { "enum": ["KOSPI", "KOSDAQ", "KONEX", "미정"] },
+    "industry": { "type": "string" },
+    "status": { "enum": ["scheduled", "open", "closed", "listed", "postponed"] },
+    "subscriptionStartDate": { "type": "string", "format": "date" },
+    "subscriptionEndDate": { "type": "string", "format": "date" },
+    "listingDate": { "type": "string", "format": "date" },
+    "refundDate": { "type": "string", "format": "date" },
+    "leadManagers": { "type": "array", "items": { "type": "string" } },
+    "offerPriceBand": {
+      "type": "object",
+      "required": ["min", "max", "currency"],
+      "properties": {
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "currency": { "const": "KRW" }
+      }
+    },
+    "confirmedOfferPrice": { "type": "number" },
+    "competitionRates": {
+      "type": "object",
+      "properties": {
+        "institutionalDemandForecast": { "type": "string" },
+        "retailSubscription": { "type": "string" }
+      }
+    },
+    "minimumSubscriptionShares": { "type": "number" },
+    "minimumDepositKrW": { "type": "number" },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "sourceUrls": { "type": "array", "items": { "type": "string", "format": "uri" } },
+    "officialNoticeUrl": { "type": "string", "format": "uri" },
+    "investmentWarning": { "type": "string" },
+    "lastUpdatedAt": { "type": "string", "format": "date" }
+  }
+}
