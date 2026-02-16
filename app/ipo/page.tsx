@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { getIpoByYear, getUpcomingIpoByYear, splitOfferingsByVisibility } from '../../data/ipo';
 
 export const metadata: Metadata = {
   title: '공모주 청약 캘린더',
@@ -16,6 +17,10 @@ export const metadata: Metadata = {
 };
 
 export default function IpoIndexPage() {
+  const offerings2026 = getIpoByYear('2026');
+  const { hidden } = splitOfferingsByVisibility(offerings2026);
+  const upcoming2026 = getUpcomingIpoByYear('2026');
+
   return (
     <div>
       <div className="breadcrumb">
@@ -31,16 +36,20 @@ export default function IpoIndexPage() {
       <section className="info-card" style={{ marginBottom: '1rem' }}>
         <h2>서비스 안내</h2>
         <ul>
-          <li>연도별 일정, 시장별, 주관사별로 공모주를 탐색할 수 있습니다.</li>
-          <li>상세 페이지에서 청약일·환불일·상장일·경쟁률·출처 링크를 제공합니다.</li>
+          <li>기본 목록에는 진행 예정/진행중인 일정만 노출됩니다.</li>
+          <li>마감/상장 완료된 종목은 페이지 하단의 “지난 일정”에서 확인할 수 있습니다.</li>
           <li>투자 전에는 반드시 공시/DART와 주관사 안내를 최종 확인하세요.</li>
         </ul>
+        <p>
+          현재 2026년 기준 <strong>{upcoming2026.length}건</strong> 진행 예정,{' '}
+          <strong>{hidden.length}건</strong> 지난 일정이 있습니다.
+        </p>
       </section>
 
       <div className="card-grid">
         <Link className="card" href="/ipo/2026/">
           <h3>2026 공모주 일정</h3>
-          <p>월별 청약 이슈와 기업별 상세 페이지를 확인하세요.</p>
+          <p>진행 예정 공모주 중심으로 정렬되어 보여집니다.</p>
           <span className="card-link">2026 캘린더 보기 →</span>
         </Link>
         <Link className="card" href="/ipo/market/">
