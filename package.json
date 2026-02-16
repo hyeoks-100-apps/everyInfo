@@ -7,7 +7,8 @@
     "build": "next build",
     "postbuild": "node scripts/postbuild.mjs",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "check:seo": "node scripts/verify-seo-artifacts.mjs"
   },
   "dependencies": {
     "next": "14.2.5",
